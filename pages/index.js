@@ -4,9 +4,9 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Layout from '../components/Layout';
-import cerealIcon from '../util/cereal-icon.jpg';
-import dairyProductsIcon from '../util/dairy-product-icon.jpg';
-import fruitsAndVegetables from '../util/fruit-icon.jpg';
+import grainIcon from '../util/cereal-icon.jpg';
+import dairyIcon from '../util/dairy-product-icon.jpg';
+import fruitsAndVegetablesIcon from '../util/fruit-icon.jpg';
 import meatIcon from '../util/meat-icon.jpg';
 
 const homePageStyle = css`
@@ -21,13 +21,13 @@ const homePageStyle = css`
   }
 `;
 
-const iconStyle = css`
+const iconsStyle = css`
   display: flex;
   justify-content: center;
   padding: auto;
 `;
 
-const singleIconStyle = css`
+const iconStyle = css`
   display: flex;
   border: 4px solid black;
   margin: 12px 24px;
@@ -60,39 +60,39 @@ export default function Home() {
           <br />
           <h1>Our Store Products</h1>
         </div>
-        <div css={iconStyle}>
-          <div css={singleIconStyle}>
+        <div css={iconsStyle}>
+          <div css={iconStyle}>
             <Image
-              src={fruitsAndVegetables}
-              className="fruitsAndVegetables"
-              alt="fruit"
+              src={fruitsAndVegetablesIcon}
+              className="fruitsAndVegetablesIcon"
+              alt="fruitsAndVegetablesIcon"
               width="200"
               height="200"
             />
           </div>
-          <div css={singleIconStyle}>
+          <div css={iconStyle}>
             <Image
-              src={dairyProductsIcon}
-              className="dairyProductsIcon"
-              alt="dairyProducts"
+              src={dairyIcon}
+              className="dairyIcon"
+              alt="dairyIcon"
               width="200"
               height="200"
             />
           </div>
-          <div css={singleIconStyle}>
+          <div css={iconStyle}>
             <Image
-              src={cerealIcon}
-              className="cerealIcon "
-              alt="cereal"
+              src={grainIcon}
+              className="grainIcon"
+              alt="grainIcon"
               width="200"
               height="200"
             />
           </div>
-          <div css={singleIconStyle}>
+          <div css={iconStyle}>
             <Image
               src={meatIcon}
-              className="meatIcon "
-              alt="meat"
+              className="meatIcon"
+              alt="meatIcon"
               width="200"
               height="200"
             />
