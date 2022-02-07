@@ -6,10 +6,12 @@ import Link from 'next/link';
 const headerStyle = css`
   display: flex;
   justify-content: flex-end;
-  background-color: #2e2e2e;
+  background-color: #228b22;
   font-size: 24px;
   padding: 24px 16px;
-  border-radius: 4px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
 
   a {
     display: flex;
