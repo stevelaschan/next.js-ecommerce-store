@@ -17,11 +17,6 @@ const homePageStyle = css`
     justify-content: center;
   }
 
-  h2 {
-    display: flex;
-    justify-content: center;
-  }
-
   p {
     display: flex;
     justify-content: center;
@@ -36,29 +31,58 @@ const iconStyle = css`
 
 const fruitsIconStyle = css`
   display: flex;
-  border: 3px solid black;
-  margin-left: 24px;
-  margin-right: 24px;
+  border: 4px solid black;
+  margin: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+  transform: translate3d(0, -5px, 5px);
+
+  :hover {
+    cursor: pointer;
+    transform: translate3d(0, 0, 0);
+  }
 `;
 
 const dairyProductsIconStyle = css`
   display: flex;
-  border: 3px solid black;
-  margin-left: 24px;
-  margin-right: 24px;
+  border: 4px solid black;
+  margin: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+  transform: translate3d(0, -5px, 5px);
+
+  :hover {
+    cursor: pointer;
+    transform: translate3d(0, 0, 0);
+  }
 `;
 
 const cerealIconStyle = css`
   display: flex;
-  border: 3px solid black;
-  margin-left: 24px;
-  margin-right: 24px;
+  border: 4px solid black;
+  margin: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+  transform: translate3d(0, -5px, 5px);
+
+  :hover {
+    cursor: pointer;
+    transform: translate3d(0, 0, 0);
+  }
 `;
+
 const meatIconStyle = css`
   display: flex;
-  border: 3px solid black;
-  margin-left: 24px;
-  margin-right: 24px;
+  border: 4px solid black;
+  margin: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+  transform: translate3d(0, -5px, 5px);
+
+  :hover {
+    cursor: pointer;
+    transform: translate3d(0, 0, 0);
+  }
 `;
 
 export default function Home() {
@@ -72,9 +96,9 @@ export default function Home() {
         <div>
           <h1>Home page</h1>
           <p>Home page content</p>
-          <h2>Why Choose Us</h2>
+          <h1>Why Choose Us</h1>
           <p>WE are distributing organic products from local farmers</p>
-          <h2>Our Store Products</h2>
+          <h1>Our Store Products</h1>
         </div>
         {/* {itemDatabase.map((item) => {
           return (
