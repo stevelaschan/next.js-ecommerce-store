@@ -1,3 +1,4 @@
+import camelcaseKeys from 'camelcase-keys';
 import { config } from 'dotenv-safe';
 import postgres from 'postgres';
 
@@ -22,14 +23,12 @@ export async function getProducts() {
   const products = await sql`
   SELECT * FROM products;
   `;
-  return products.map((product) => {
-    return product;
-  });
+  return products.map((product) => camelcaseKeys(product));
 }
 
 export async function getProductById(id) {
   const [product] = await sql`
   SELECT * FROM products WHERE ID = ${id};
   `;
-  return product;
+  return camelcaseKeys(product);
 }
