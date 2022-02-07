@@ -12,7 +12,7 @@ export default function Store() {
         <title>Our Store</title>
         <meta name="description" content="Store" />
       </Head>
-      <h1>Welcome to the Store</h1>
+      <h1>Our Products</h1>
     </Layout>
   );
 }
