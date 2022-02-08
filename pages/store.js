@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/Layout';
+import { getProducts } from '../util/database';
 
 export default function Store(props) {
   return (
@@ -16,11 +17,22 @@ export default function Store(props) {
       {props.products.map((product) => {
         return (
           <div key={product.id}>
-            <Link href={product.id} />
-            <a>{product.name}</a>
+            <Link href={`products/${product.id}`}>
+              <a>{product.name}</a>
+            </Link>
           </div>
         );
       })}
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  const products = await getProducts();
+
+  return {
+    props: {
+      products: products,
+    },
+  };
 }

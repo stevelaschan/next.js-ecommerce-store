@@ -9,12 +9,12 @@ export default function About() {
         <meta name="description" content="About the Store" />
       </Head>
       <div>
-        <h1>About</h1>
-        <p>This is the about page</p>
+        <h1>Cart Checkout Page</h1>
+        <p>This is the checkout page</p>
       </div>
       <div>
-        <h2>Contact Us</h2>
-        <p>Contact info</p>
+        <h2>Your products</h2>
+        <p>Your products</p>
       </div>
     </Layout>
   );

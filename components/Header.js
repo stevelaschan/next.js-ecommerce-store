@@ -36,8 +36,8 @@ export default function Header() {
       <Link href="store">
         <a>Our Store</a>
       </Link>
-      <Link href="about">
-        <a>About</a>
+      <Link href="cart">
+        <a>Cart</a>
       </Link>
     </header>
   );

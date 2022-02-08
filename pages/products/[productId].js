@@ -13,8 +13,8 @@ export default function SingleProduct(props) {
       <h1>{props.product.name}</h1>
       <Image src={`/store-products/${props.name}`} width="300" height="300" />
       <div>id: {props.products.id}</div>
-      <div>product type: {props.product.type}</div>
       <div>name: {props.products.name}</div>
+      <div>product type: {props.product.type}</div>
       <div>price: {props.products.price}</div>
     </Layout>
   );
