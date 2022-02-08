@@ -11,11 +11,15 @@ export default function SingleProduct(props) {
         <meta description={props.product.name} />
       </Head>
       <h1>{props.product.name}</h1>
-      <Image src={`/store-products/${props.name}`} width="300" height="300" />
-      <div>id: {props.products.id}</div>
-      <div>name: {props.products.name}</div>
+      <Image
+        src={`/store-products/${props.product.name}.jpg`}
+        width="400"
+        height="200"
+      />
+      <div>id: {props.product.id}</div>
+      <div>name: {props.product.name}</div>
       <div>product type: {props.product.type}</div>
-      <div>price: {props.products.price}</div>
+      <div>price: {props.product.price}</div>
     </Layout>
   );
 }
