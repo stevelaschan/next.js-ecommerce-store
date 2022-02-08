@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import BuyButton from '../../components/BuyButton';
 import Layout from '../../components/Layout';
 import { getProductById } from '../../util/database';
 
@@ -13,13 +14,14 @@ export default function SingleProduct(props) {
       <h1>{props.product.name}</h1>
       <Image
         src={`/store-products/${props.product.name}.jpg`}
-        width="400"
-        height="200"
+        width="600"
+        height="400"
       />
       <div>id: {props.product.id}</div>
       <div>name: {props.product.name}</div>
       <div>product type: {props.product.type}</div>
       <div>price: {props.product.price}</div>
+      <BuyButton />
     </Layout>
   );
 }
