@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-
 import { css, Global } from '@emotion/react';
 
 function MyApp({ Component, pageProps }) {

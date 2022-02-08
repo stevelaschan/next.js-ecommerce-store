@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/babel-plugin": "^11.7.2",
     "@emotion/react": "^11.7.1",
     "camelcase-keys": "^7.0.2",
     "dotenv-safe": "^8.2.0",
