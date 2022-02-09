@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
-import Cookie from 'js-cookie';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
-// import AddToCart from '../../components/AddToCart';
 import Layout from '../../components/Layout';
 import { getParsedCookie, setParsedCookie } from '../../util/cookies';
 import { getProductById } from '../../util/database';
@@ -27,13 +25,24 @@ const productDescriptionStyle = css`
 
 export default function SingleProduct(props) {
   const [amount, setAmount] = useState(0);
-  const [addedToArray, setAddToArray] = useState(props.addedToCart);
+  // const [addedToArray, setAddedToArray] = useState(props.addedToCart);
 
   function clickAddToCart(id) {
-    // 1. get the cookie value
+    // 1 get the value of the cookie
     const cookieValue = getParsedCookie('addedToCart') || [];
 
     // 2. update the cookie
+    const idExistInArray = cookieValue.some((cookieObject) => {
+      return cookieObject.id === id;
+    });
+
+    let newCookie;
+    if (idExistInArray) {
+      return (newCookie = [...cookieValue, { id: id, amount: amount }]);
+    }
+
+    // 3. set the new value of the cookie
+    setParsedCookie('addedToCart', newCookie);
   }
 
   return (
@@ -61,6 +70,7 @@ export default function SingleProduct(props) {
             value={amount}
             onChange={(e) => setAmount(e.currentTarget.value)}
           >
+            <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
