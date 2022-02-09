@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
+import Cookie from 'js-cookie';
 import Head from 'next/head';
 import Image from 'next/image';
-import AddToCart from '../../components/AddToCart';
+import { useState } from 'react';
+// import AddToCart from '../../components/AddToCart';
 import Layout from '../../components/Layout';
+import { getParsedCookie, setParsedCookie } from '../../util/cookies';
 import { getProductById } from '../../util/database';
 
 const productHeadingStyle = css`
@@ -23,6 +26,16 @@ const productDescriptionStyle = css`
 `;
 
 export default function SingleProduct(props) {
+  const [amount, setAmount] = useState(0);
+  const [addedToArray, setAddToArray] = useState(props.addedToCart);
+
+  function clickAddToCart(id) {
+    // 1. get the cookie value
+    const cookieValue = getParsedCookie('addedToCart') || [];
+
+    // 2. update the cookie
+  }
+
   return (
     <Layout>
       <Head>
@@ -42,19 +55,44 @@ export default function SingleProduct(props) {
         <div>name: {props.product.name}</div>
         <div>product type: {props.product.type}</div>
         <div>price: {props.product.price}</div>
-        <AddToCart />
+        <form>
+          Choose an amount:
+          <select
+            value={amount}
+            onChange={(e) => setAmount(e.currentTarget.value)}
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+          <button onClick={clickAddToCart(props.product.id)}>
+            Add to Cart
+          </button>
+          {console.log(amount)}
+        </form>
       </div>
     </Layout>
   );
 }
 
 export async function getServerSideProps(context) {
+  // product list
   const productId = context.query.productId;
   const product = await getProductById(productId);
+  // added to cart amount
+  const addedToCartOnCookies = context.req.cookies.addedToCart || '[]';
+  const addedToCart = JSON.parse(addedToCartOnCookies);
 
   return {
     props: {
       product: product,
+      addedToCart: addedToCart,
     },
   };
 }
