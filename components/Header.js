@@ -31,10 +31,10 @@ export default function Header() {
       <Link href="/">
         <a>Home</a>
       </Link>
-      <Link href="store">
+      <Link href="/store">
         <a>Our Store</a>
       </Link>
-      <Link href="cart">
+      <Link href="/cart">
         <a>Cart</a>
       </Link>
     </header>

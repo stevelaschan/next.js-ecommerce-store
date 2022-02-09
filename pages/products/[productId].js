@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
-import BuyButton from '../../components/BuyButton';
+import AddToCart from '../../components/AddToCart';
 import Layout from '../../components/Layout';
 import { getProductById } from '../../util/database';
 
@@ -42,7 +42,7 @@ export default function SingleProduct(props) {
         <div>name: {props.product.name}</div>
         <div>product type: {props.product.type}</div>
         <div>price: {props.product.price}</div>
-        <BuyButton />
+        <AddToCart />
       </div>
     </Layout>
   );

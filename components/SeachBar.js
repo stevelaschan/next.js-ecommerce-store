@@ -25,7 +25,7 @@ const productSearchBar = css`
 export default function SearchBar() {
   return (
     <div css={productSearchBar}>
-      <input for="searBar" placeholder="Search for your item..." />
+      <input placeholder="Search for your item..." />
       <button>Search</button>
     </div>
   );
