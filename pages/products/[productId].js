@@ -32,18 +32,33 @@ export default function SingleProduct(props) {
     const cookieValue = getParsedCookie('addedToCart') || [];
 
     // 2. update the cookie
+    // 2.1 does id exist in cookie?
     const idExistInArray = cookieValue.some((cookieObject) => {
       return cookieObject.id === id;
     });
 
     let newCookie;
     if (idExistInArray) {
-      return (newCookie = [...cookieValue, { id: id, amount: amount }]);
+      // 2.2 pass anything that is not an id in the cookie, delete if cookie id is already in cookie
+      newCookie = cookieValue.filter((cookieObject) => {
+        return cookieObject.id !== id;
+      });
+      // 2.3 add new cookie
+      // } else {
+      newCookie = [
+        ...cookieValue,
+        { id: id, amount: amount, price: props.product.price * amount },
+      ];
     }
 
     // 3. set the new value of the cookie
+    // setAddedToArray(newCookie);
     setParsedCookie('addedToCart', newCookie);
   }
+
+  // const productIsAddedToCart = addedToArray.some((addedObject) => {
+  //   return addedObject.id === props.product.id;
+  // });
 
   return (
     <Layout>
@@ -70,7 +85,6 @@ export default function SingleProduct(props) {
             value={amount}
             onChange={(e) => setAmount(e.currentTarget.value)}
           >
-            <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -84,7 +98,7 @@ export default function SingleProduct(props) {
           <button onClick={clickAddToCart(props.product.id)}>
             Add to Cart
           </button>
-          {console.log(amount)}
+          {/* {productIsAddedToCart ? 'Add to Cart' : ''} */}
         </form>
       </div>
     </Layout>
@@ -95,8 +109,10 @@ export async function getServerSideProps(context) {
   // product list
   const productId = context.query.productId;
   const product = await getProductById(productId);
-  // added to cart amount
+  // 1. get the cookies from the browser
+  // 2. pass the cookies to the frontend
   const addedToCartOnCookies = context.req.cookies.addedToCart || '[]';
+  // if there is no addedToCart cookie on the browser we store to an [] otherwise we get the cooke value and parse it
   const addedToCart = JSON.parse(addedToCartOnCookies);
 
   return {
