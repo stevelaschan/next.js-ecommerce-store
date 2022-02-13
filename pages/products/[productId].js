@@ -13,18 +13,25 @@ const productHeadingStyle = css`
 const productPictureStyle = css`
   display: flex;
   justify-content: center;
-  border: 2px solid black;
 `;
 
 const productDescriptionStyle = css`
   div {
     display: flex;
     justify-content: center;
+    margin: 4px;
+    font-size: 24px;
   }
 `;
 
+const clickAddToCartStyle = css`
+  display: flex;
+  justify-content: center;
+  margin: 18px;
+`;
+
 export default function SingleProduct(props) {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   // const [addedToArray, setAddedToArray] = useState(props.addedToCart);
 
   function clickAddToCart(id) {
@@ -33,33 +40,28 @@ export default function SingleProduct(props) {
 
     // 2. update the cookie
     // 2.1 does id exist in cookie?
-    const idExistInArray = cookieValue.some((cookieObject) => {
-      return cookieObject.id === id;
-    });
+    // const idExistInArray = cookieValue.some((cookieObject) => {
+    //   return cookieObject.id === id;
+    // });
 
-    let newCookie;
-    if (idExistInArray) {
-      // 2.2 pass anything that is not an id in the cookie, delete if cookie id is already in cookie
-      newCookie = cookieValue.filter((cookieObject) => {
-        return cookieObject.id !== id;
-      });
-      // 2.3 add new cookie
-      // } else {
-      newCookie = [
-        ...cookieValue,
-        { id: id, amount: amount, price: props.product.price * amount },
-      ];
-    }
+    // let newCookie;
+    // if (idExistInArray) {
+    //   // 2.2 pass anything that is not an id in the cookie, delete if cookie id is already in cookie
+    //   newCookie = cookieValue.filter((cookieObject) => {
+    //     return cookieObject.amount === amount;
+    //   });
+
+    //   // 2.3 add new cookie
+    // } else {
+    const newCookie = [
+      ...cookieValue,
+      { id: id, amount: amount, name: props.product.name },
+    ];
+    // }
 
     // 3. set the new value of the cookie
-    // setAddedToArray(newCookie);
     setParsedCookie('addedToCart', newCookie);
   }
-
-  // const productIsAddedToCart = addedToArray.some((addedObject) => {
-  //   return addedObject.id === props.product.id;
-  // });
-
   return (
     <Layout>
       <Head>
@@ -68,22 +70,25 @@ export default function SingleProduct(props) {
       </Head>
 
       <h1 css={productHeadingStyle}>{props.product.name.toUpperCase()}</h1>
-      <Image
-        css={productPictureStyle}
-        src={`/store-products/${props.product.name}.jpg`}
-        width="600"
-        height="400"
-      />
+      <div css={productPictureStyle}>
+        <Image
+          src={`/store-products/${props.product.name}.jpg`}
+          width="600"
+          height="400"
+          data-test-id="product-image"
+        />
+      </div>
       <div css={productDescriptionStyle}>
         <div>id: {props.product.id}</div>
-        <div>name: {props.product.name}</div>
-        <div>product type: {props.product.type}</div>
-        <div>price: {props.product.price}</div>
-        <form>
+        <div>{props.product.name}</div>
+        <div>{props.product.type}</div>
+        <div data-test-id="product-price">{props.product.price} Cent</div>
+        <form css={clickAddToCartStyle}>
           Choose an amount:
           <select
             value={amount}
             onChange={(e) => setAmount(e.currentTarget.value)}
+            data-test-id="product-quantity"
           >
             <option value="1">1</option>
             <option value="2">2</option>
@@ -95,9 +100,13 @@ export default function SingleProduct(props) {
             <option value="8">8</option>
             <option value="9">9</option>
           </select>
-          <button onClick={clickAddToCart(props.product.id)}>
+          <button
+            onClick={() => clickAddToCart(props.product.id)}
+            data-test-id="product-add-to-cart"
+          >
             Add to Cart
           </button>
+          {console.log(amount)}
           {/* {productIsAddedToCart ? 'Add to Cart' : ''} */}
         </form>
       </div>

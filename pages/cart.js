@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
+import SingleProduct from './products/[productId]';
 
-export default function About() {
+export default function Cart() {
   return (
     <Layout>
       <Head>
@@ -14,7 +15,7 @@ export default function About() {
       </div>
       <div>
         <h2>Your products</h2>
-        <p>Your products</p>
+        <SingleProduct />
       </div>
     </Layout>
   );
