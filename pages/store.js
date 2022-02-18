@@ -5,11 +5,27 @@ import Link from 'next/link';
 import Layout from '../components/Layout';
 import { getProducts } from '../util/database';
 
-const productsImagesStyle = css`
+const productsListStyle = css`
   display: flex;
-  margin: 16px;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const productsImagesStyle = css`
+  display: flex;
+  border: 4px solid black;
+  border-radius: 8px;
+  margin: 20px 12px;
+
+  cursor: pointer;
+`;
+
+const productNameStyle = css`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  cursor: pointer;
 `;
 
 export default function Store(props) {
@@ -20,26 +36,31 @@ export default function Store(props) {
         <meta name="description" content="Store" />
       </Head>
       <h1>Our Products</h1>
-      {props.products.map((product) => {
-        return (
-          <div key={product.id}>
-            <div css={productsImagesStyle}>
-              <Image
-                src={`/store-products/${product.name}.jpg`}
-                alt={product.name}
-                width="400"
-                height="200"
-              />
+      <div css={productsListStyle}>
+        {props.products.map((product) => {
+          return (
+            <div key={product.id}>
+              <div css={productsImagesStyle}>
+                <Link
+                  href={`products/${product.id}`}
+                  data-test-id={`product-${product.id}`}
+                  passHref
+                >
+                  <Image
+                    src={`/store-products/${product.name}.jpg`}
+                    alt={product.name}
+                    width="300"
+                    height="150"
+                  />
+                </Link>
+              </div>
+              <Link href={`products/${product.id}`} passHref>
+                <span css={productNameStyle}>{product.name.toUpperCase()}</span>
+              </Link>
             </div>
-            <Link
-              href={`products/${product.id}`}
-              data-test-id={`product-${product.id}`}
-            >
-              <a>{product.name}</a>
-            </Link>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </Layout>
   );
 }

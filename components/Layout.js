@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Header from './Header';
-import SearchBar from './SeachBar';
 
 export default function Layout(props) {
   return (
@@ -9,7 +8,6 @@ export default function Layout(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <SearchBar />
       <main>{props.children}</main>
     </>
   );

@@ -89,10 +89,8 @@ export default function SingleProduct(props) {
         />
       </div>
       <div css={productDescriptionStyle}>
-        <div>id: {props.product.id}</div>
-        <div>{props.product.name}</div>
-        <div>{props.product.type}</div>
-        <div data-test-id="product-price">{props.product.price} Cent</div>
+        <div>{props.product.name.toUpperCase()}</div>
+        <div data-test-id="product-price">{props.product.price / 100} €</div>
         <form css={clickAddToCartStyle}>
           Choose an amount:
           <select

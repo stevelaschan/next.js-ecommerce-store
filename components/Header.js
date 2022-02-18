@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
 
+// import { getParsedCookie } from '../util/cookies';
+
 const headerStyle = css`
   display: flex;
   justify-content: flex-end;
@@ -26,6 +28,8 @@ const headerStyle = css`
 `;
 
 export default function Header() {
+  // const cartItems = getParsedCookie('addedToCart');
+
   return (
     <header css={headerStyle}>
       <Link href="/">
@@ -38,6 +42,7 @@ export default function Header() {
         <Link href="/cart">
           <a>Cart</a>
         </Link>
+        {/* <div>{cartItems.amount}</div> */}
       </div>
     </header>
   );

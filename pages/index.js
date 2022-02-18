@@ -52,9 +52,9 @@ export default function Home() {
           <p>Welcome to the Online Store of WE-Commerce</p>
           <br />
           <h1>Why Choose Us</h1>
-          <p>WE are distributing products from local farmers.</p>
-          <p>WE only sell organic products.</p>
-          <p>WE support local farmers in their digitalisation</p>
+          <p>We are distributing products from local farmers.</p>
+          <p>We only sell organic products.</p>
+          <p>We support local farmers in their digitalisation</p>
           <br />
           <h1>Our Store Products</h1>
         </div>
