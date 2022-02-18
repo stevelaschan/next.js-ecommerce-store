@@ -40,24 +40,34 @@ export default function SingleProduct(props) {
 
     // 2. update the cookie
     // 2.1 does id exist in cookie?
-    // const idExistInArray = cookieValue.some((cookieObject) => {
-    //   return cookieObject.id === id;
-    // });
+    const idExistInArray = cookieValue.some((cookieObject) => {
+      return cookieObject.id === id;
+    });
 
-    // let newCookie;
-    // if (idExistInArray) {
-    //   // 2.2 pass anything that is not an id in the cookie, delete if cookie id is already in cookie
-    //   newCookie = cookieValue.filter((cookieObject) => {
-    //     return cookieObject.amount === amount;
-    //   });
+    let newCookie;
+    if (idExistInArray) {
+      // 2.2 pass anything that is not an id in the cookie, delete if cookie id is already in cookie
+      newCookie = cookieValue.map((cookieObject) => {
+        return {
+          id: cookieObject.id,
+          amount: cookieObject.amount + amount,
+          name: props.product.name,
+          price: props.product.price * amount,
+        };
+      });
 
-    //   // 2.3 add new cookie
-    // } else {
-    const newCookie = [
-      ...cookieValue,
-      { id: id, amount: amount, name: props.product.name },
-    ];
-    // }
+      // 2.3 add new cookie
+    } else {
+      newCookie = [
+        ...cookieValue,
+        {
+          id: id,
+          amount: amount,
+          name: props.product.name,
+          price: props.product.price,
+        },
+      ];
+    }
 
     // 3. set the new value of the cookie
     setParsedCookie('addedToCart', newCookie);
@@ -106,7 +116,7 @@ export default function SingleProduct(props) {
           >
             Add to Cart
           </button>
-          {console.log(amount)}
+          {/* {console.log(amount)} */}
           {/* {productIsAddedToCart ? 'Add to Cart' : ''} */}
         </form>
       </div>

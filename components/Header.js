@@ -38,7 +38,6 @@ export default function Header() {
         <Link href="/cart">
           <a>Cart</a>
         </Link>
-        {/* <span>{JSON.stringify(props.addedToCart)}</span> */}
       </div>
     </header>
   );

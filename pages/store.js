@@ -33,7 +33,7 @@ export default function Store(props) {
             </div>
             <Link
               href={`products/${product.id}`}
-              data-test-id="product-product-id"
+              data-test-id={`product-${product.id}`}
             >
               <a>{product.name}</a>
             </Link>
