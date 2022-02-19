@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import {
   Button,
   Card,
@@ -20,14 +21,17 @@ import Layout from '../components/Layout';
 import { getParsedCookie, setParsedCookie } from '../util/cookies';
 import { getProducts } from '../util/database';
 
+const shoppingCartHeaderStyle = css`
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+`;
+
 export default function Cart() {
   const cartItems = getParsedCookie('addedToCart') || [];
-  console.log(cartItems);
 
   // function deleteFromCart(id) {
-  //   // 1 get the value of the cookie
-  //   const cookieValue = getParsedCookie('addedToCart');
-  //   const newCookie = cookieValue.filter((cookieObject) => {
+  //   const newCookie = cartItems.filter((cookieObject) => {
   //     return cookieObject.id !== id;
   //   });
   //   setParsedCookie('addedToCart', newCookie);
@@ -39,7 +43,7 @@ export default function Cart() {
         <title>Cart</title>
         <meta name="description" content="Cart" />
       </Head>
-      <h1>Shopping Cart</h1>
+      <h1 css={shoppingCartHeaderStyle}>Shopping Cart</h1>
       {cartItems.length === 0 ? (
         <div>
           Cart is empty. <NextLink href="/store">Go shopping</NextLink>

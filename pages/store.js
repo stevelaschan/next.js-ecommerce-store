@@ -5,6 +5,12 @@ import Link from 'next/link';
 import Layout from '../components/Layout';
 import { getProducts } from '../util/database';
 
+const ourProductsStyle = css`
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+`;
+
 const productsListStyle = css`
   display: flex;
   flex-direction: row;
@@ -24,8 +30,13 @@ const productsImagesStyle = css`
 const productNameStyle = css`
   display: flex;
   justify-content: center;
-  margin-bottom: 24px;
   cursor: pointer;
+`;
+
+const productPriceStyle = css`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
 `;
 
 export default function Store(props) {
@@ -35,7 +46,7 @@ export default function Store(props) {
         <title>Our Store</title>
         <meta name="description" content="Store" />
       </Head>
-      <h1>Our Products</h1>
+      <h1 css={ourProductsStyle}>Our Products</h1>
       <div css={productsListStyle}>
         {props.products.map((product) => {
           return (
@@ -57,6 +68,7 @@ export default function Store(props) {
               <Link href={`products/${product.id}`} passHref>
                 <span css={productNameStyle}>{product.name.toUpperCase()}</span>
               </Link>
+              <span css={productPriceStyle}>{product.price / 100} €</span>
             </div>
           );
         })}

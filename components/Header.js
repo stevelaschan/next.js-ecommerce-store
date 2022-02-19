@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
-
-// import { getParsedCookie } from '../util/cookies';
+import { getParsedCookie } from '../util/cookies';
 
 const headerStyle = css`
   display: flex;
@@ -28,7 +27,7 @@ const headerStyle = css`
 `;
 
 export default function Header() {
-  // const cartItems = getParsedCookie('addedToCart');
+  const cartItems = getParsedCookie('addedToCart') || [];
 
   return (
     <header css={headerStyle}>
@@ -40,9 +39,8 @@ export default function Header() {
       </Link>
       <div>
         <Link href="/cart">
-          <a>Cart</a>
+          <a>Cart ({cartItems.reduce((a, c) => a + c.amount, 0)})</a>
         </Link>
-        {/* <div>{cartItems.amount}</div> */}
       </div>
     </header>
   );

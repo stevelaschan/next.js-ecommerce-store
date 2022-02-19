@@ -7,15 +7,42 @@ import dairyIcon from '../util/dairy-product-icon.jpg';
 import fruitsAndVegetablesIcon from '../util/fruit-icon.jpg';
 import meatIcon from '../util/meat-icon.jpg';
 
-const homePageStyle = css`
+const backgroundImage = css`
+  background-image: url('https://images.pexels.com/photos/1443867/pexels-photo-1443867.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  background-position: 0 100%;
+  background-size: cover;
+`;
+
+const weCommerceHeaderStyle = css`
+  display: flex;
+  justify-content: center;
+
   h1 {
     display: flex;
     justify-content: center;
+    font-size: 48px;
+    font-weight: 12px;
+    padding: 8px;
+    border-radius: 12px;
+    border: 2px solid black;
+    background-color: #fafafa;
+    box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+  }
+`;
+
+const homePageStyle = css`
+  h2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    font-size: 40px;
+    font-weight: 12px;
   }
 
   p {
     display: flex;
     justify-content: center;
+    color: white;
   }
 `;
 
@@ -23,6 +50,7 @@ const iconsStyle = css`
   display: flex;
   justify-content: center;
   padding: auto;
+  margin-top: 18px;
 `;
 
 const iconStyle = css`
@@ -47,16 +75,36 @@ export default function Home() {
         <meta name="description" content="Welcome to my website" />
       </Head>
       <div css={homePageStyle}>
-        <div>
-          <h1>Home page</h1>
-          <p>Welcome to the Online Store of WE-Commerce</p>
+        <div css={backgroundImage}>
           <br />
-          <h1>Why Choose Us</h1>
-          <p>We are distributing products from local farmers.</p>
-          <p>We only sell organic products.</p>
-          <p>We support local farmers in their digitalisation</p>
           <br />
-          <h1>Our Store Products</h1>
+          <br />
+          <br />
+          <br />
+          <br />
+          <h2>Buy your products from local farmers around Austria</h2>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <div css={weCommerceHeaderStyle}>
+            <h1>WE-Commerce</h1>
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
         <div css={iconsStyle}>
           <div css={iconStyle}>

@@ -46,7 +46,7 @@ export default function SingleProduct(props) {
 
     let newCookie;
     if (idExistInArray) {
-      // 2.2 pass anything that is not an id in the cookie, delete if cookie id is already in cookie
+      // 2.2 if cookie id already exists, update amount and price
       newCookie = cookieValue.map((cookieObject) => {
         return {
           id: cookieObject.id,
