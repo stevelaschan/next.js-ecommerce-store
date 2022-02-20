@@ -29,16 +29,44 @@ const productDescriptionStyle = css`
   }
 `;
 
-const clickAddToCartStyle = css`
+const buttonsStyle = css`
   display: flex;
-  justify-content: center;
-  margin: 18px;
+  padding: 12px;
+`;
+
+const decrementIncrementButtonStyle = css`
+  border-radius: 50%;
+  margin-right: 6px;
+  margin-left: 6px;
+  cursor: pointer;
+  background-color: #424242;
+  color: white;
+  padding: 12px;
+`;
+
+const clickAddToCartStyle = css`
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #424242;
+  color: white;
 `;
 
 export default function SingleProduct(props) {
-  const i = 0;
   const [amount, setAmount] = useState(1);
-  // const [addedToArray, setAddedToArray] = useState(props.addedToCart);
+
+  // decrement amount added to cart
+  function handleDecrementAmount() {
+    if (amount <= 1) {
+      setAmount(1);
+      return;
+    }
+    setAmount(amount - 1);
+  }
+
+  // increment amount added to cart
+  function handleIncrementAmount() {
+    return setAmount(amount + 1);
+  }
 
   function clickAddToCart(id) {
     // 1 get the value of the cookie
@@ -58,7 +86,6 @@ export default function SingleProduct(props) {
           id: cookieObject.id,
           amount: cookieObject.amount + amount,
           name: props.product.name,
-          price: props.product.price * amount,
         };
       });
 
@@ -70,14 +97,14 @@ export default function SingleProduct(props) {
           id: id,
           amount: amount,
           name: props.product.name,
-          price: props.product.price,
         },
       ];
     }
-
+    window.location.reload();
     // 3. set the new value of the cookie
     setParsedCookie('addedToCart', newCookie);
   }
+
   return (
     <Layout>
       <Head>
@@ -104,30 +131,29 @@ export default function SingleProduct(props) {
           <div data-test-id="product-price">
             {props.product.price / 100} € per Portion
           </div>
-          <form css={clickAddToCartStyle}>
-            <select
-              value={amount}
-              onChange={(e) => setAmount(e.currentTarget.value)}
-              data-test-id="product-quantity"
+          <div css={buttonsStyle}>
+            <button
+              onClick={(e) => handleDecrementAmount(e.currentTarget.value)}
+              css={decrementIncrementButtonStyle}
             >
-              <option value={i + 1}>1</option>
-              <option value={i + 2}>2</option>
-              <option value={i + 3}>3</option>
-              <option value={i + 4}>4</option>
-              <option value={i + 5}>5</option>
-              <option value={i + 6}>6</option>
-              <option value={i + 7}>7</option>
-              <option value={i + 8}>8</option>
-              <option value={i + 9}>9</option>
-            </select>
+              -
+            </button>
+            <span>{amount}</span>
+            <button
+              onClick={(e) => handleIncrementAmount(e.currentTarget.value)}
+              css={decrementIncrementButtonStyle}
+            >
+              +
+            </button>
             {console.log(typeof amount)}
             <button
-              onClick={() => clickAddToCart(props.product.id)}
               data-test-id="product-add-to-cart"
+              onClick={() => clickAddToCart(props.product.id)}
+              css={clickAddToCartStyle}
             >
               Add to Cart
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </Layout>
