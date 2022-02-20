@@ -27,15 +27,28 @@ const shoppingCartHeaderStyle = css`
   margin-top: 48px;
 `;
 
-export default function Cart() {
+export default function Cart(props) {
   const cartItems = getParsedCookie('addedToCart') || [];
 
-  // function deleteFromCart(id) {
-  //   const newCookie = cartItems.filter((cookieObject) => {
-  //     return cookieObject.id !== id;
-  //   });
-  //   setParsedCookie('addedToCart', newCookie);
-  // }
+  // calculate total price
+  const priceTimesAmount = (id) => {
+    if (props.addedToCart.id === id) {
+      props.addedToCart.map((item) => {
+        return (item.amount * props.products.price) / 100;
+      });
+    } else {
+      return console.log('undefinded');
+    }
+  };
+
+  // delete item from cart
+  const deleteFromCart = (id) => {
+    const newCookie = cartItems.filter((cookieObject) => {
+      return cookieObject.id !== id;
+    });
+    window.location.reload();
+    setParsedCookie('addedToCart', newCookie);
+  };
 
   return (
     <Layout>
@@ -64,7 +77,7 @@ export default function Cart() {
                 </TableHead>
                 <TableBody>
                   {cartItems.map((item) => (
-                    <TableRow key={item._id}>
+                    <TableRow key={item.id}>
                       <TableCell>
                         <NextLink href={`products/${item.id}`} passHref>
                           <Link>
@@ -92,13 +105,15 @@ export default function Cart() {
                       <TableCell align="right">
                         <Typography>{item.amount}</Typography>
                       </TableCell>
-                      <TableCell align="right">€{item.price / 100}</TableCell>
+                      <TableCell align="right">
+                        €{priceTimesAmount(item.id)}
+                      </TableCell>
                       <TableCell align="right">
                         <Button
                           variant="contained"
                           color="secondary"
                           data-test-id={`cart-product-remove-${item.id}`}
-                          // onClick={deleteFromCart(item.id)}
+                          onClick={() => deleteFromCart(item.id)}
                         >
                           x
                         </Button>
@@ -109,7 +124,7 @@ export default function Cart() {
               </Table>
             </TableContainer>
           </Grid>
-          <Grid md={3} xs={12}>
+          <Grid item md={3} xs={12}>
             <Card>
               <List>
                 <ListItem>
@@ -117,7 +132,7 @@ export default function Cart() {
                     Total ({cartItems.reduce((a, c) => a + c.amount, 0)} items)
                     : €
                     {cartItems.reduce(
-                      (a, c) => a + (c.amount * c.price) / 100,
+                      (a, c) => a + (c.amount * props.products.price) / 100,
                       0,
                     )}
                   </Typography>
@@ -143,12 +158,15 @@ export default function Cart() {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const products = await getProducts();
+  const addedToCartOnCookies = context.req.cookies.addedToCart || '[]';
+  const addedToCart = JSON.parse(addedToCartOnCookies);
 
   return {
     props: {
       products: products,
+      addedToCart: addedToCart,
     },
   };
 }
