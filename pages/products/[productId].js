@@ -18,6 +18,8 @@ const productHeadingStyle = css`
 const productPictureStyle = css`
   display: flex;
   justify-content: center;
+  margin-left: 18px;
+  margin-right: 18px;
 `;
 
 const productDescriptionStyle = css`
@@ -31,7 +33,7 @@ const productDescriptionStyle = css`
 
 const buttonsStyle = css`
   display: flex;
-  padding: 12px;
+  padding: 28px 12px;
 `;
 
 const decrementIncrementButtonStyle = css`
@@ -49,6 +51,7 @@ const clickAddToCartStyle = css`
   cursor: pointer;
   background-color: #424242;
   color: white;
+  padding: 12px;
 `;
 
 export default function SingleProduct(props) {
@@ -74,20 +77,27 @@ export default function SingleProduct(props) {
 
     // 2. update the cookie
     // 2.1 does id exist in cookie?
-    const idExistInArray = cookieValue.some((cookieObject) => {
-      return cookieObject.id === id;
-    });
+    const idExistInArraySome = cookieValue.some(
+      (cookieObject) => cookieObject.id === id,
+    );
+    const idExistInArrayFind = cookieValue.find(
+      (cookieObject) => cookieObject.id === id,
+    );
+    const idNotExistInArrayFilter = cookieValue.filter(
+      (cookieObject) => cookieObject.id !== id,
+    );
 
     let newCookie;
-    if (idExistInArray) {
-      // 2.2 if cookie id already exists, update amount and price
-      newCookie = cookieValue.map((cookieObject) => {
-        return {
-          id: cookieObject.id,
-          amount: cookieObject.amount + amount,
-          name: props.product.name,
-        };
-      });
+    if (idExistInArraySome) {
+      // 2.2 if cookie id already exists, update amount
+      newCookie = [
+        ...idNotExistInArrayFilter,
+        {
+          id: idExistInArrayFind.id,
+          amount: idExistInArrayFind.amount + amount,
+          name: idExistInArrayFind.name,
+        },
+      ];
 
       // 2.3 add new cookie
     } else {
@@ -145,7 +155,6 @@ export default function SingleProduct(props) {
             >
               +
             </button>
-            {console.log(typeof amount)}
             <button
               data-test-id="product-add-to-cart"
               onClick={() => clickAddToCart(props.product.id)}
