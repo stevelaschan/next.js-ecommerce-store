@@ -29,7 +29,8 @@
     "**/*.js",
     "**/*.jsx",
     "**/*.cjs",
-    "**/*.mjs"
+    "**/*.mjs",
+    "pages/index.txs"
   ],
   "exclude": ["node_modules", "build"]
 }

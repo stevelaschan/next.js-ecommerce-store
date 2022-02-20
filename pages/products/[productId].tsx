@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -54,7 +55,22 @@ const clickAddToCartStyle = css`
   padding: 12px;
 `;
 
-export default function SingleProduct(props) {
+type Props = {
+  product: {
+    id: number;
+    name: string;
+    amount: number;
+    price: number;
+  };
+};
+
+type CookieObject = {
+  id: number;
+  name: string;
+  amount: number;
+};
+
+export default function SingleProduct(props: Props) {
   const [amount, setAmount] = useState(1);
 
   // decrement amount added to cart
@@ -71,20 +87,20 @@ export default function SingleProduct(props) {
     return setAmount(amount + 1);
   }
 
-  function clickAddToCart(id) {
+  function clickAddToCart(id: number) {
     // 1 get the value of the cookie
     const cookieValue = getParsedCookie('addedToCart') || [];
 
     // 2. update the cookie
     // 2.1 does id exist in cookie?
     const idExistInArraySome = cookieValue.some(
-      (cookieObject) => cookieObject.id === id,
+      (cookieObject: CookieObject) => cookieObject.id === id,
     );
     const idExistInArrayFind = cookieValue.find(
-      (cookieObject) => cookieObject.id === id,
+      (cookieObject: CookieObject) => cookieObject.id === id,
     );
     const idNotExistInArrayFilter = cookieValue.filter(
-      (cookieObject) => cookieObject.id !== id,
+      (cookieObject: CookieObject) => cookieObject.id !== id,
     );
 
     let newCookie;
@@ -110,6 +126,7 @@ export default function SingleProduct(props) {
         },
       ];
     }
+    // eslint-disable-next-line no-restricted-syntax
     window.location.reload();
     // 3. set the new value of the cookie
     setParsedCookie('addedToCart', newCookie);
@@ -119,7 +136,7 @@ export default function SingleProduct(props) {
     <Layout>
       <Head>
         <title>{props.product.name}</title>
-        <meta description={props.product.name} />
+        <meta name="description" content={props.product.name} />
       </Head>
       <br />
       <br />
@@ -143,14 +160,14 @@ export default function SingleProduct(props) {
           </div>
           <div css={buttonsStyle}>
             <button
-              onClick={(e) => handleDecrementAmount(e.currentTarget.value)}
+              onClick={() => handleDecrementAmount()}
               css={decrementIncrementButtonStyle}
             >
               -
             </button>
             <span>{amount}</span>
             <button
-              onClick={(e) => handleIncrementAmount(e.currentTarget.value)}
+              onClick={() => handleIncrementAmount()}
               css={decrementIncrementButtonStyle}
             >
               +
@@ -169,7 +186,7 @@ export default function SingleProduct(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   // product list
   const productId = context.query.productId;
   const product = await getProductById(productId);

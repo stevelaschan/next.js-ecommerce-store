@@ -26,6 +26,10 @@ const headerStyle = css`
   }
 `;
 
+type C = {
+  amount: number;
+};
+
 export default function Header() {
   const cartItems = getParsedCookie('addedToCart') || [];
 
@@ -38,8 +42,10 @@ export default function Header() {
         <a>Our Store</a>
       </Link>
       <div>
-        <Link href="/cart">
-          <a>Cart ({cartItems.reduce((a, c) => a + c.amount, 0)})</a>
+        <Link href="/cart" data-test-id="cart-link">
+          <a data-test-id="cart-count">
+            Cart ({cartItems.reduce((a: number, c: C) => a + c.amount, 0)})
+          </a>
         </Link>
       </div>
     </header>

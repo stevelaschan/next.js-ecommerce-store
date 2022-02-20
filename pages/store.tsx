@@ -52,7 +52,18 @@ const productPriceStyle = css`
   margin-bottom: 24px;
 `;
 
-export default function Store(props) {
+type Product = {
+  id: number;
+  name: string;
+  amount: number;
+  price: number;
+};
+
+type Props = {
+  products: Product[];
+};
+
+export default function Store(props: Props) {
   return (
     <Layout>
       <Head>
@@ -61,7 +72,7 @@ export default function Store(props) {
       </Head>
       <h1 css={ourProductsStyle}>Our Products</h1>
       <div css={productsListStyle}>
-        {props.products.map((product) => {
+        {props.products.map((product: Product) => {
           return (
             <div key={product.id}>
               <div css={productsImagesStyle}>
@@ -78,7 +89,10 @@ export default function Store(props) {
                   />
                 </Link>
               </div>
-              <Link href={`products/${product.id}`}>
+              <Link
+                href={`products/${product.id}`}
+                data-test-id="products-link"
+              >
                 <a css={productNameStyle}>{product.name.toUpperCase()}</a>
               </Link>
               <span css={productPriceStyle}>

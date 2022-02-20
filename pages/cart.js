@@ -46,7 +46,8 @@ export default function Cart(props) {
     const newCookie = cartItems.filter((cookieObject) => {
       return cookieObject.id !== id;
     });
-    window.location.reload();
+    // eslint-disable-next-line no-restricted-syntax
+    window.location.reload(false);
     setParsedCookie('addedToCart', newCookie);
   };
 
