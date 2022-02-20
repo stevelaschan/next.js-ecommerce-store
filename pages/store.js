@@ -20,17 +20,30 @@ const productsListStyle = css`
 
 const productsImagesStyle = css`
   display: flex;
-  border: 4px solid black;
-  border-radius: 8px;
-  margin: 20px 12px;
+  border: 2px solid black;
+  border-radius: 4px;
+  margin: 24px 8px 4px 8px;
+  box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+  transform: translate3d(0, -5px, 5px);
 
-  cursor: pointer;
+  :hover {
+    cursor: pointer;
+    transform: translate3d(0, 0, 0);
+  }
 `;
 
 const productNameStyle = css`
   display: flex;
   justify-content: center;
-  cursor: pointer;
+  margin-top: 0;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 4px 126px;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const productPriceStyle = css`
@@ -60,15 +73,17 @@ export default function Store(props) {
                   <Image
                     src={`/store-products/${product.name}.jpg`}
                     alt={product.name}
-                    width="300"
-                    height="150"
+                    width="340"
+                    height="190"
                   />
                 </Link>
               </div>
-              <Link href={`products/${product.id}`} passHref>
-                <span css={productNameStyle}>{product.name.toUpperCase()}</span>
+              <Link href={`products/${product.id}`}>
+                <a css={productNameStyle}>{product.name.toUpperCase()}</a>
               </Link>
-              <span css={productPriceStyle}>{product.price / 100} €</span>
+              <span css={productPriceStyle}>
+                {product.price / 100} € per Portion
+              </span>
             </div>
           );
         })}

@@ -13,7 +13,7 @@ const backgroundImage = css`
   background-size: cover;
 `;
 
-const weCommerceHeaderStyle = css`
+const mainHeaderStyle = css`
   display: flex;
   justify-content: center;
 
@@ -21,12 +21,12 @@ const weCommerceHeaderStyle = css`
     display: flex;
     justify-content: center;
     font-size: 48px;
-    font-weight: 12px;
-    padding: 8px;
-    border-radius: 12px;
+    font-weight: 8px;
+    padding: 4px;
+    /* border-radius: 12px;
     border: 2px solid black;
     background-color: #fafafa;
-    box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 6px rgb(40 50 40 / 25%); */
   }
 `;
 
@@ -35,8 +35,8 @@ const homePageStyle = css`
     display: flex;
     justify-content: center;
     margin-top: 0;
-    font-size: 40px;
-    font-weight: 12px;
+    font-size: 36px;
+    font-weight: 8px;
   }
 
   p {
@@ -59,12 +59,12 @@ const iconStyle = css`
   margin: 12px 24px;
   border-radius: 8px;
   box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
-  transform: translate3d(0, -5px, 5px);
+  /* transform: translate3d(0, -5px, 5px); */
 
-  :hover {
+  /* :hover {
     cursor: pointer;
     transform: translate3d(0, 0, 0);
-  }
+  } */
 `;
 
 export default function Home() {
@@ -81,17 +81,9 @@ export default function Home() {
           <br />
           <br />
           <br />
-          <br />
           <h2>Buy your products from local farmers around Austria</h2>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <div css={weCommerceHeaderStyle}>
-            <h1>WE-Commerce</h1>
+          <div css={mainHeaderStyle}>
+            <h1>FarmHouse E-Commerce</h1>
           </div>
           <br />
           <br />
@@ -105,7 +97,18 @@ export default function Home() {
           <br />
           <br />
           <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
+        <br />
+        <br />
+        <h2>Categories We Offer</h2>
         <div css={iconsStyle}>
           <div css={iconStyle}>
             <Image
@@ -145,6 +148,19 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <p>
+        © Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+        nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+        rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+        ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
+        elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+        aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+        dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+        est Lorem ipsum dolor sit amet.
+      </p>
     </Layout>
   );
 }

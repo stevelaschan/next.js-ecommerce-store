@@ -10,7 +10,7 @@ const headerStyle = css`
   padding: 24px 16px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15); */
 
   a {
     display: flex;
