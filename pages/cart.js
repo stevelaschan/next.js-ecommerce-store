@@ -31,13 +31,11 @@ export default function Cart(props) {
   const cartItems = getParsedCookie('addedToCart') || [];
 
   // calculate total price
-  const priceTimesAmount = (id) => {
-    if (props.addedToCart.id === id) {
-      props.addedToCart.map((item) => {
-        return (item.amount * props.products.price) / 100;
+  const priceTimesAmount = () => {
+    if (cartItems.id === props.products.id) {
+      cartItems.map((item) => {
+        return (item.amount * props.products.prices) / 100;
       });
-    } else {
-      return console.log('undefinded');
     }
   };
 
@@ -47,7 +45,7 @@ export default function Cart(props) {
       return cookieObject.id !== id;
     });
     // eslint-disable-next-line no-restricted-syntax
-    window.location.reload(false);
+    window.location.reload();
     setParsedCookie('addedToCart', newCookie);
   };
 
@@ -107,7 +105,7 @@ export default function Cart(props) {
                         <Typography>{item.amount}</Typography>
                       </TableCell>
                       <TableCell align="right">
-                        €{priceTimesAmount(item.id)}
+                        €{(item.amount * item.price) / 100}
                       </TableCell>
                       <TableCell align="right">
                         <Button
@@ -133,7 +131,7 @@ export default function Cart(props) {
                     Total ({cartItems.reduce((a, c) => a + c.amount, 0)} items)
                     : €
                     {cartItems.reduce(
-                      (a, c) => a + (c.amount * props.products.price) / 100,
+                      (a, c) => a + (c.amount * c.price) / 100,
                       0,
                     )}
                   </Typography>

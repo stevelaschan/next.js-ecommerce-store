@@ -6,10 +6,6 @@ const mainStyle = css`
   margin: 0;
 `;
 
-// type Props = {
-//   children: any;
-// };
-
 export default function Layout(props) {
   return (
     <>

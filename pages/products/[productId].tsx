@@ -112,6 +112,7 @@ export default function SingleProduct(props: Props) {
           id: idExistInArrayFind.id,
           amount: idExistInArrayFind.amount + amount,
           name: idExistInArrayFind.name,
+          price: idExistInArrayFind.price,
         },
       ];
 
@@ -123,6 +124,7 @@ export default function SingleProduct(props: Props) {
           id: id,
           amount: amount,
           name: props.product.name,
+          price: props.product.price,
         },
       ];
     }
