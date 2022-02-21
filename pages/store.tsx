@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import { getProducts } from '../util/database';
@@ -77,11 +76,11 @@ export default function Store(props: Props) {
             <div key={product.id}>
               <div css={productsImagesStyle}>
                 <Link
-                  href={`products/${product.id}`}
+                  href={`/products/${product.id}`}
                   data-test-id={`product-${product.id}`}
                   passHref
                 >
-                  <Image
+                  <img
                     src={`/store-products/${product.name}.jpg`}
                     alt={product.name}
                     width="340"
@@ -90,10 +89,16 @@ export default function Store(props: Props) {
                 </Link>
               </div>
               <Link
-                href={`products/${product.id}`}
+                href={`/products/${product.id}`}
                 data-test-id="products-link"
               >
-                <a css={productNameStyle}>{product.name.toUpperCase()}</a>
+                <a
+                  href={`/products/${product.id}`}
+                  data-test-id="products-link"
+                  css={productNameStyle}
+                >
+                  {product.name.toUpperCase()}
+                </a>
               </Link>
               <span css={productPriceStyle}>
                 {product.price / 100} € per Portion

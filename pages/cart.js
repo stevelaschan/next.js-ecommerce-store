@@ -33,13 +33,7 @@ export default function Cart(props) {
   const [cart, setCart] = useState(cartItems);
 
   // calculate total price
-  const priceTimesAmount = () => {
-    if (cartItems.id === props.products.id) {
-      cartItems.map((item) => {
-        return (item.amount * props.products.prices) / 100;
-      });
-    }
-  };
+  const productPrice = props.products.map((product) => product.price / 100);
 
   const deleteFromCart = (id) => {
     const newCookie = cart.filter((cookieObject) => {
@@ -58,7 +52,7 @@ export default function Cart(props) {
       <h1 css={shoppingCartHeaderStyle}>Shopping Cart</h1>
       {cartItems.length === 0 ? (
         <div>
-          Cart is empty. <NextLink href="/store">Go shopping</NextLink>
+          Your Cart is empty. <NextLink href="/store">Go shopping</NextLink>
         </div>
       ) : (
         <Grid container spacing={1}>
@@ -105,7 +99,7 @@ export default function Cart(props) {
                         <Typography>{item.amount}</Typography>
                       </TableCell>
                       <TableCell align="right">
-                        €{(item.amount * item.price) / 100}
+                        €{item.amount * productPrice[item.id - 1]}
                       </TableCell>
                       <TableCell align="right">
                         <Button
@@ -131,7 +125,7 @@ export default function Cart(props) {
                     Total ({cartItems.reduce((a, c) => a + c.amount, 0)} items)
                     : €
                     {cartItems.reduce(
-                      (a, c) => a + (c.amount * c.price) / 100,
+                      (a, c) => a + c.amount * productPrice[c.id - 1],
                       0,
                     )}
                   </Typography>
