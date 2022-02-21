@@ -35,6 +35,7 @@ export default function Cart(props) {
   // calculate total price
   const productPrice = props.products.map((product) => product.price / 100);
 
+  // delete item from cart
   const deleteFromCart = (id) => {
     const newCookie = cart.filter((cookieObject) => {
       return cookieObject.id !== id;

@@ -72,8 +72,8 @@ type CookieObject = {
 
 export default function SingleProduct(props: Props) {
   const [amount, setAmount] = useState(1);
-  const cookieValue = getParsedCookie('addedToCart') || [];
-  const [cart, setCart] = useState(cookieValue);
+  const cartItems = getParsedCookie('addedToCart') || [];
+  const [cart, setCart] = useState(cartItems);
 
   // decrement amount added to cart
   function handleDecrementAmount() {
@@ -90,37 +90,37 @@ export default function SingleProduct(props: Props) {
   }
 
   function clickAddToCart(id: number) {
-    // true or false that id in array
-    const idExistInArraySome = cart.some(
+    // is id in array => return true or false
+    const idExistInArray = cart.some(
       (cookieObject: CookieObject) => cookieObject.id === id,
     );
 
-    // find in array: result single object with same id
-    const idExistInArrayFind = cart.find(
+    // find in array => return single object with same id
+    const productWithSameId = cart.find(
       (cookieObject: CookieObject) => cookieObject.id === id,
     );
 
-    // filter array: result array without product with same id
-    const idNotExistInArrayFilter = cart.filter(
+    // filter array => return an array without product with same id
+    const productsWithDifferentId = cart.filter(
       (cookieObject: CookieObject) => cookieObject.id !== id,
     );
 
     let newCookie;
-    if (idExistInArraySome) {
-      // if cookie id already exists, update amount
+    // if cookie id exists, update amount
+    if (idExistInArray) {
       newCookie = [
-        ...idNotExistInArrayFilter,
+        ...productsWithDifferentId,
         {
-          id: idExistInArrayFind.id,
-          amount: idExistInArrayFind.amount + amount,
-          name: idExistInArrayFind.name,
+          id: productWithSameId.id,
+          amount: productWithSameId.amount + amount,
+          name: productWithSameId.name,
         },
       ];
 
       // add new cookie
     } else {
       newCookie = [
-        ...cookieValue,
+        ...cartItems,
         {
           id: id,
           amount: amount,
@@ -128,7 +128,6 @@ export default function SingleProduct(props: Props) {
         },
       ];
     }
-
     setParsedCookie('addedToCart', newCookie);
     setCart(newCookie);
   }

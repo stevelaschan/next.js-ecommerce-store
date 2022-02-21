@@ -57,6 +57,7 @@ const confirmOrderButtonStyle = css`
 `;
 
 export default function Checkout() {
+  // delete all items from cart when confirming order
   const deleteAllFromCart = () => {
     setParsedCookie('addedToCart', []);
   };
