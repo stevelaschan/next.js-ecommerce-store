@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/Layout';
+import { setParsedCookie } from '../util/cookies';
 
 const userPersonalStyle = css`
   display: grid;
@@ -56,6 +57,10 @@ const confirmOrderButtonStyle = css`
 `;
 
 export default function Checkout() {
+  const deleteAllFromCart = () => {
+    setParsedCookie('addedToCart', []);
+  };
+
   return (
     <Layout>
       <Head>
@@ -127,6 +132,7 @@ export default function Checkout() {
         <button
           data-test-id="checkout-confirm-order"
           css={confirmOrderButtonStyle}
+          onClick={() => deleteAllFromCart()}
         >
           Confirm Order
         </button>
