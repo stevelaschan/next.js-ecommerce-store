@@ -72,6 +72,8 @@ type CookieObject = {
 
 export default function SingleProduct(props: Props) {
   const [amount, setAmount] = useState(1);
+  const cookieValue = getParsedCookie('addedToCart') || [];
+  const [cart, setCart] = useState(cookieValue);
 
   // decrement amount added to cart
   function handleDecrementAmount() {
@@ -88,24 +90,24 @@ export default function SingleProduct(props: Props) {
   }
 
   function clickAddToCart(id: number) {
-    // 1 get the value of the cookie
-    const cookieValue = getParsedCookie('addedToCart') || [];
+    // true or false that id in array
+    const idExistInArraySome = cart.some(
+      (cookieObject: CookieObject) => cookieObject.id === id,
+    );
 
-    // 2. update the cookie
-    // 2.1 does id exist in cookie?
-    const idExistInArraySome = cookieValue.some(
+    // find in array: result single object with same id
+    const idExistInArrayFind = cart.find(
       (cookieObject: CookieObject) => cookieObject.id === id,
     );
-    const idExistInArrayFind = cookieValue.find(
-      (cookieObject: CookieObject) => cookieObject.id === id,
-    );
-    const idNotExistInArrayFilter = cookieValue.filter(
+
+    // filter array: result array without product with same id
+    const idNotExistInArrayFilter = cart.filter(
       (cookieObject: CookieObject) => cookieObject.id !== id,
     );
 
     let newCookie;
     if (idExistInArraySome) {
-      // 2.2 if cookie id already exists, update amount
+      // if cookie id already exists, update amount
       newCookie = [
         ...idNotExistInArrayFilter,
         {
@@ -116,7 +118,7 @@ export default function SingleProduct(props: Props) {
         },
       ];
 
-      // 2.3 add new cookie
+      // add new cookie
     } else {
       newCookie = [
         ...cookieValue,
@@ -128,9 +130,8 @@ export default function SingleProduct(props: Props) {
         },
       ];
     }
-    // eslint-disable-next-line no-restricted-syntax
-    window.location.reload();
-    // 3. set the new value of the cookie
+
+    setCart(newCookie);
     setParsedCookie('addedToCart', newCookie);
   }
 

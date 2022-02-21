@@ -17,6 +17,7 @@ import {
 import Head from 'next/head';
 import Image from 'next/image';
 import NextLink from 'next/link';
+import { useState } from 'react';
 import Layout from '../components/Layout';
 import { getParsedCookie, setParsedCookie } from '../util/cookies';
 import { getProducts } from '../util/database';
@@ -29,6 +30,7 @@ const shoppingCartHeaderStyle = css`
 
 export default function Cart(props) {
   const cartItems = getParsedCookie('addedToCart') || [];
+  const [cart, setCart] = useState(cartItems);
 
   // calculate total price
   const priceTimesAmount = () => {
@@ -39,13 +41,11 @@ export default function Cart(props) {
     }
   };
 
-  // delete item from cart
   const deleteFromCart = (id) => {
-    const newCookie = cartItems.filter((cookieObject) => {
+    const newCookie = cart.filter((cookieObject) => {
       return cookieObject.id !== id;
     });
-    // eslint-disable-next-line no-restricted-syntax
-    window.location.reload();
+    setCart(newCookie);
     setParsedCookie('addedToCart', newCookie);
   };
 
