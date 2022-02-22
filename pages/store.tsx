@@ -113,7 +113,7 @@ export default function Store(props: Props) {
 
 export async function getServerSideProps() {
   const products = await getProducts();
-
+  console.log(products);
   return {
     props: {
       products: products,
