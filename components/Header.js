@@ -35,6 +35,15 @@ const headerStyle = css`
   }
 `;
 
+const shoppingCartStyle = css`
+  display: flex;
+`;
+
+const cartItemsStyle = css`
+  display: flex;
+  font-size: 18px;
+`;
+
 export default function Header() {
   const cartItems = getParsedCookie('addedToCart') || [];
 
@@ -49,7 +58,12 @@ export default function Header() {
       <div>
         <Link href="/cart" data-test-id="cart-link">
           <a data-test-id="cart-count">
-            Cart ({cartItems.reduce((a, c) => a + c.amount, 0)})
+            <div css={shoppingCartStyle}>
+              <img src="/shopping-cart-icon.png" alt="" height="24px" />
+            </div>
+            <span css={cartItemsStyle}>
+              {cartItems.reduce((a, c) => a + c.amount, 0)}
+            </span>
           </a>
         </Link>
       </div>
