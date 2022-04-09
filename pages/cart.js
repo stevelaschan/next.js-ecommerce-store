@@ -25,7 +25,7 @@ import { getProducts } from '../util/database';
 const shoppingCartHeaderStyle = css`
   display: flex;
   justify-content: center;
-  margin-top: 48px;
+  margin-top: 96px;
 `;
 
 export default function Cart(props) {

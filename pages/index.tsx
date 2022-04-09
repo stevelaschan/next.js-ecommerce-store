@@ -16,17 +16,19 @@ const backgroundImage = css`
 const mainHeaderStyle = css`
   display: flex;
   justify-content: center;
+  padding: auto;
 
   h1 {
     display: flex;
     justify-content: center;
     font-size: 48px;
-    font-weight: 8px;
-    padding: 4px;
-    /* border-radius: 12px;
-    border: 2px solid black;
-    background-color: #fafafa;
-    box-shadow: 0 0 0 6px rgb(40 50 40 / 25%); */
+    padding: 16px;
+    color: white;
+    border: 1px solid #383838;
+    background-color: #2b5a6d;
+    opacity: 0.7;
+    border-radius: 8px;
+    /* box-shadow: 0 0 0 6px rgb(40 50 40 / 25%); */
   }
 `;
 
@@ -37,6 +39,7 @@ const homePageStyle = css`
     margin-top: 0;
     font-size: 36px;
     font-weight: 8px;
+    color: #383838;
   }
 
   p {
@@ -55,7 +58,7 @@ const iconsStyle = css`
 
 const iconStyle = css`
   display: flex;
-  border: 4px solid black;
+  border: 4px solid #383838;
   margin: 12px 24px;
   border-radius: 8px;
   box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
@@ -81,10 +84,14 @@ export default function Home() {
           <br />
           <br />
           <br />
-          <h2>Buy your products from local farmers around Austria</h2>
+          {/* <h2>Buy your products from local farmers around Austria</h2> */}
           <div css={mainHeaderStyle}>
             <h1>FarmHouse E-Commerce</h1>
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
           <br />
           <br />
           <br />

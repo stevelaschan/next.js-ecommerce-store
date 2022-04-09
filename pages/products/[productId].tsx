@@ -15,6 +15,7 @@ const productStyle = css`
 const productHeadingStyle = css`
   display: flex;
   justify-content: center;
+  margin-top: 96px;
 `;
 const productPictureStyle = css`
   display: flex;
@@ -42,7 +43,7 @@ const decrementIncrementButtonStyle = css`
   margin-right: 6px;
   margin-left: 6px;
   cursor: pointer;
-  background-color: #424242;
+  background-color: #505050;
   color: white;
   padding: 12px;
 `;
@@ -50,7 +51,7 @@ const decrementIncrementButtonStyle = css`
 const clickAddToCartStyle = css`
   border-radius: 8px;
   cursor: pointer;
-  background-color: #424242;
+  background-color: #505050;
   color: white;
   padding: 12px;
 `;

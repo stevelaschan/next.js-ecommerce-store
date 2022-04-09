@@ -3,20 +3,29 @@ import Link from 'next/link';
 import { getParsedCookie } from '../util/cookies';
 
 const headerStyle = css`
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  width: 100%;
+  height: 8vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(30px);
+  box-shadow: 0 0 5px rgba(200, 200, 200, 0.3);
   display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 0 8px;
   justify-content: flex-end;
-  background-color: #228b22;
-  font-size: 24px;
-  padding: 24px 16px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  font-size: 24px;
   /* box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15); */
 
   a {
     display: flex;
     cursor: pointer;
     margin: 0 24px;
-    color: white;
+    color: #505050;
     text-decoration: none;
   }
 

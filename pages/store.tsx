@@ -7,7 +7,15 @@ import { getProducts } from '../util/database';
 const ourProductsStyle = css`
   display: flex;
   justify-content: center;
-  margin-top: 48px;
+  margin-top: 96px;
+  color: #383838;
+`;
+
+const productHeaderStyle = css`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+  color: #383838;
 `;
 
 const productsListStyle = css`
@@ -21,7 +29,7 @@ const productsImagesStyle = css`
   display: flex;
   border: 2px solid black;
   border-radius: 4px;
-  margin: 24px 8px 4px 8px;
+  margin: 4px 8px;
   box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15);
   transform: translate3d(0, -5px, 5px);
 
@@ -31,19 +39,17 @@ const productsImagesStyle = css`
   }
 `;
 
-const productNameStyle = css`
-  display: flex;
-  justify-content: center;
-  margin-top: 0;
-  text-decoration: none;
-  border: 1px solid black;
-  border-radius: 8px;
-  margin: 4px 126px;
+// const productNameStyle = css`
+//   display: flex;
+//   justify-content: center;
+//   margin-top: 0;
+//   text-decoration: none;
+//   margin: 4px 126px;
 
-  :hover {
-    cursor: pointer;
-  }
-`;
+//   :hover {
+//     cursor: pointer;
+//   }
+// `;
 
 const productPriceStyle = css`
   display: flex;
@@ -74,6 +80,9 @@ export default function Store(props: Props) {
         {props.products.map((product: Product) => {
           return (
             <div key={product.id}>
+              <div css={productHeaderStyle}>
+                <h3>{product.name.toUpperCase()}</h3>
+              </div>
               <div css={productsImagesStyle}>
                 <Link
                   href={`/products/${product.id}`}
@@ -88,7 +97,7 @@ export default function Store(props: Props) {
                   />
                 </Link>
               </div>
-              <Link
+              {/* <Link
                 href={`/products/${product.id}`}
                 data-test-id="products-link"
               >
@@ -99,7 +108,7 @@ export default function Store(props: Props) {
                 >
                   {product.name.toUpperCase()}
                 </a>
-              </Link>
+              </Link> */}
               <span css={productPriceStyle}>
                 {product.price / 100} € per Portion
               </span>
