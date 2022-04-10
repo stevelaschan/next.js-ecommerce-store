@@ -44,6 +44,12 @@ const cartItemsStyle = css`
   font-size: 18px;
 `;
 
+type CartItems = {
+  id: number;
+  price: number;
+  amount: number;
+};
+
 export default function Header() {
   const cartItems = getParsedCookie('addedToCart') || [];
 
@@ -59,10 +65,10 @@ export default function Header() {
         <Link href="/cart" data-test-id="cart-link">
           <a data-test-id="cart-count">
             <div css={shoppingCartStyle}>
-              <img src="/shopping-cart-icon.png" alt="" height="24px" />
+              <img src="/shopping-cart-icon.png" alt="" height="28px" />
             </div>
             <span css={cartItemsStyle}>
-              {cartItems.reduce((a, c) => a + c.amount, 0)}
+              {cartItems.reduce((a: number, c: CartItems) => a + c.amount, 0)}
             </span>
           </a>
         </Link>

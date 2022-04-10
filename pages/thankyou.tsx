@@ -15,8 +15,8 @@ export default function ThankYou() {
   return (
     <div>
       <h1 css={thankYouStyle}>Thank you for your order</h1>
-      <Link href="/" css={goBackToStoreStyle}>
-        Go back to Our Store
+      <Link href="/">
+        <a css={goBackToStoreStyle}>Go back to Our Store</a>
       </Link>
     </div>
   );

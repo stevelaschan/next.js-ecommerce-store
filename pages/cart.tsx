@@ -14,6 +14,7 @@ import {
   TableRow,
   Typography,
 } from '@material-ui/core';
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import NextLink from 'next/link';
@@ -28,7 +29,23 @@ const shoppingCartHeaderStyle = css`
   margin-top: 96px;
 `;
 
-export default function Cart(props) {
+type Product = {
+  id: number;
+  type: string;
+  price: number;
+};
+
+type AddedToCart = {
+  id: number;
+  amount: number;
+  name: string;
+};
+
+type Props = {
+  products: Product[];
+};
+
+export default function Cart(props: Props) {
   const cartItems = getParsedCookie('addedToCart') || [];
   const [cart, setCart] = useState(cartItems);
 
@@ -36,8 +53,8 @@ export default function Cart(props) {
   const productPrice = props.products.map((product) => product.price / 100);
 
   // delete item from cart
-  const deleteFromCart = (id) => {
-    const newCookie = cart.filter((cookieObject) => {
+  const deleteFromCart = (id: number) => {
+    const newCookie = cart.filter((cookieObject: AddedToCart) => {
       return cookieObject.id !== id;
     });
     setCart(newCookie);
@@ -70,7 +87,7 @@ export default function Cart(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {cartItems.map((item) => (
+                  {cartItems.map((item: AddedToCart) => (
                     <TableRow key={item.id}>
                       <TableCell>
                         <NextLink href={`products/${item.id}`} passHref>
@@ -123,10 +140,15 @@ export default function Cart(props) {
               <List>
                 <ListItem>
                   <Typography variant="h5" data-test-id="cart-total">
-                    Total ({cartItems.reduce((a, c) => a + c.amount, 0)} items)
-                    : €
+                    Total (
                     {cartItems.reduce(
-                      (a, c) => a + c.amount * productPrice[c.id - 1],
+                      (a: number, c: AddedToCart) => a + c.amount,
+                      0,
+                    )}{' '}
+                    items) : €
+                    {cartItems.reduce(
+                      (a: number, c: AddedToCart) =>
+                        a + c.amount * productPrice[c.id - 1],
                       0,
                     )}
                   </Typography>
@@ -152,10 +174,12 @@ export default function Cart(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const products = await getProducts();
   const addedToCartOnCookies = context.req.cookies.addedToCart || '[]';
   const addedToCart = JSON.parse(addedToCartOnCookies);
+  console.log('products', products);
+  console.log('addedToCart', addedToCart);
 
   return {
     props: {

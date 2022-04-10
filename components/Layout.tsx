@@ -6,7 +6,11 @@ const mainStyle = css`
   margin: 0;
 `;
 
-export default function Layout(props) {
+type Props = {
+  children: object
+}
+
+export default function Layout(props: Props) {
   return (
     <>
       <Head>
