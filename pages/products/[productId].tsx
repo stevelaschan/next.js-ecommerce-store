@@ -16,13 +16,14 @@ const productHeadingStyle = css`
   display: flex;
   justify-content: center;
   margin-top: 96px;
+  z-index: 1;
 `;
 const productPictureStyle = css`
   display: flex;
   justify-content: center;
   margin-left: 18px;
   margin-right: 18px;
-  z-index: -1;
+  z-index: 1;
 `;
 
 const productDescriptionStyle = css`
@@ -31,6 +32,7 @@ const productDescriptionStyle = css`
     justify-content: center;
     margin: 4px;
     font-size: 24px;
+    z-index: 1;
   }
 `;
 
