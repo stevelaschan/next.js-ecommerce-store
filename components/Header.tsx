@@ -18,7 +18,7 @@ const headerStyle = css`
   justify-content: flex-end;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  font-size: 24px;
+  font-size: 20px;
   /* box-shadow: 0 5px 12px 2px rgba(0, 0, 0, 0.15); */
 
   a {
@@ -41,7 +41,7 @@ const shoppingCartStyle = css`
 
 const cartItemsStyle = css`
   display: flex;
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 type CartItems = {

@@ -22,6 +22,7 @@ const productPictureStyle = css`
   justify-content: center;
   margin-left: 18px;
   margin-right: 18px;
+  z-index: -1;
 `;
 
 const productDescriptionStyle = css`
