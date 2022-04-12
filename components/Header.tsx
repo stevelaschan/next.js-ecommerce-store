@@ -4,7 +4,7 @@ import { getParsedCookie } from '../util/cookies';
 
 const headerStyle = css`
   position: fixed;
-  z-index: 2;
+  z-index: 1;
   top: 0;
   width: 100%;
   height: 8vh;
